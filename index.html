@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ResuméCraft — Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-mark">RC</span>
+      <span class="logo-text">ResuméCraft</span>
+    </div>
+    <div class="header-actions">
+      <div class="template-switcher">
+        <span class="switcher-label">Template</span>
+        <button class="tpl-btn active" data-tpl="minimal" title="Minimal">
+          <span class="tpl-icon">▣</span> Minimal
+        </button>
+        <button class="tpl-btn" data-tpl="modern" title="Modern">
+          <span class="tpl-icon">◈</span> Modern
+        </button>
+      </div>
+      <button class="btn-download" id="downloadBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="app-layout">
+
+    <!-- Left Panel: Form -->
+    <aside class="form-panel">
+      <div class="panel-header">
+        <h2>Your Details</h2>
+        <p>Fill in your information to build your resume</p>
+      </div>
+
+      <form id="resumeForm" novalidate>
+
+        <!-- Personal Info -->
+        <section class="form-section" data-section="personal">
+          <div class="section-title">
+            <span class="section-num">01</span>
+            <h3>Personal Info</h3>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="e.g. Alexandra Chen" maxlength="60"/>
+            </div>
+            <div class="field">
+              <label for="jobTitle">Job Title</label>
+              <input type="text" id="jobTitle" placeholder="e.g. Senior Product Designer" maxlength="80"/>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="hello@example.com"/>
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" placeholder="+1 (555) 000-0000"/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="New York, NY"/>
+              </div>
+              <div class="field">
+                <label for="website">Website / LinkedIn</label>
+                <input type="text" id="website" placeholder="linkedin.com/in/yourname"/>
+              </div>
+            </div>
+            <div class="field">
+              <label for="summary">Professional Summary</label>
+              <textarea id="summary" rows="3" placeholder="A brief statement about your professional background and goals..."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="form-section" data-section="experience">
+          <div class="section-title">
+            <span class="section-num">02</span>
+            <h3>Experience</h3>
+            <button type="button" class="btn-add" id="addExp">+ Add</button>
+          </div>
+          <div id="experienceList" class="dynamic-list"></div>
+        </section>
+
+        <!-- Education -->
+        <section class="form-section" data-section="education">
+          <div class="section-title">
+            <span class="section-num">03</span>
+            <h3>Education</h3>
+            <button type="button" class="btn-add" id="addEdu">+ Add</button>
+          </div>
+          <div id="educationList" class="dynamic-list"></div>
+        </section>
+
+        <!-- Skills -->
+        <section class="form-section" data-section="skills">
+          <div class="section-title">
+            <span class="section-num">04</span>
+            <h3>Skills</h3>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="skillInput">Add a Skill</label>
+              <div class="skill-input-row">
+                <input type="text" id="skillInput" placeholder="e.g. Figma, Python, Leadership..." maxlength="40"/>
+                <button type="button" class="btn-add-skill" id="addSkillBtn">Add</button>
+              </div>
+            </div>
+            <div id="skillTags" class="skill-tags"></div>
+          </div>
+        </section>
+
+      </form>
+    </aside>
+
+    <!-- Right Panel: Preview -->
+    <section class="preview-panel">
+      <div class="preview-toolbar">
+        <span class="preview-label">Live Preview</span>
+        <div class="zoom-controls">
+          <button class="zoom-btn" id="zoomOut" title="Zoom Out">−</button>
+          <span class="zoom-val" id="zoomVal">100%</span>
+          <button class="zoom-btn" id="zoomIn" title="Zoom In">+</button>
+        </div>
+      </div>
+      <div class="preview-scroll">
+        <div class="preview-scale-wrapper" id="scaleWrapper">
+          <div class="resume-paper" id="resumePreview">
+            <!-- Dynamically rendered -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
